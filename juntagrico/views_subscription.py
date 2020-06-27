@@ -297,6 +297,7 @@ class AddCoMemberView(FormView, ModelFormMixin):
         # create new member from form data or update existing
         co_member = form.instance
         co_member.pk = getattr(getattr(form, 'existing_member', None), 'pk', None)
+        co_member.user = getattr(getattr(form, 'existing_member', None), 'user', None)
         create_or_update_co_member(co_member, self.subscription, form.cleaned_data['shares'])
         return self._done()
 
